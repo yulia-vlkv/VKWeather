@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 
 class MainFabric {
+    
+    func makeNavigationController(rootViewController: UIViewController) -> UINavigationController {
+        UINavigationController(rootViewController: rootViewController)
+    }
         
     func makeMainScreen(location: Location?) -> (UIViewController, MainScreenViewOutput) {
         let view = MainScreenView()

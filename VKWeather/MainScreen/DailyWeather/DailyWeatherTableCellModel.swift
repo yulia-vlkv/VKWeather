@@ -38,9 +38,9 @@ extension DailyWeatherTableCellModel  {
         
         self.description = dailyWeather.description[0].verbalDesctiption
         
-        self.lowestTemperature = String(dailyWeather.temp.lowestTemperature)
+        self.lowestTemperature = String(format: "%.0f", dailyWeather.temp.lowestTemperature)
         
-        self.highestTemperature = String(dailyWeather.temp.highestTemperature)
+        self.highestTemperature = String(format: "%.0f", dailyWeather.temp.highestTemperature)
         
     }
 }

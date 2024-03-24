@@ -9,21 +9,24 @@ import Foundation
 import MapKit
 
 protocol ForecastServiceDelegate: AnyObject {
-    func didUpdateWeather(_ forecastService: ForecastService, currentWeather: CurrentWeather, dailyWeather: DailyWeather)
+    func didUpdateWeather(_ forecastService: ForecastService, currentWeather: WeatherModel)
     func didFailWithError(error: Error)
 }
 
 enum ForecastServiceError: Error {
     case noData
-    case unknown(Error)
+    case cantParse
+    case unknown
 }
 
 class ForecastService {
     
     weak var delegate: ForecastServiceDelegate?
     
-    private let baseURLCurrent = "https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru"
-    private let baseURLDaily = "https://api.openweathermap.org/data/2.5/forecast/daily?&cnt=7&units=metric&lang=ru"
+    private let baseURL = "https://api.openweathermap.org/data/3.0/onecall?units=metric&lang=ru"
+    
+//    private let baseURLCurrent = "https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru"
+//    private let baseURLDaily = "https://api.openweathermap.org/data/2.5/forecast/daily?&cnt=7&units=metric&lang=ru"
     
     private var apiKey: String {
       get {
@@ -38,22 +41,12 @@ class ForecastService {
       }
     }
     
-//    func fetchWeather(cityName: String) {
-//        let urlString = "\(baseURL)&appid=\(apiKey)&q=\(cityName)"
-//        performRequest(with: urlString)
-//    }
-    
-    func fetchCurrentWeather(latitude: String, longitude: String) {
-        let urlString = "\(baseURLCurrent)&appid=\(apiKey)&lat=\(latitude)&lon=\(longitude)"
-            self.performRequest(with: urlString)
+    func getURLString(latitude: String, longitude: String) -> String  {
+        let urlString = "\(baseURL)&appid=\(apiKey)&lat=\(latitude)&lon=\(longitude)"
+        return urlString
     }
     
-    func fetchDailyWeather(latitude: String, longitude: String) {
-        let urlString = "\(baseURLDaily)&appid=\(apiKey)&lat=\(latitude)&lon=\(longitude)"
-            self.performRequest(with: urlString)
-    }
-    
-    func performRequest(with urlString: String) {
+    func performRequest(with urlString: String, complition: @escaping (Result<WeatherModel, ForecastServiceError>) -> Void) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) {( data, response, error) in
@@ -63,29 +56,15 @@ class ForecastService {
                 }
                 
                 if let safeData = data {
-//                    if let weather = self.parseJSON(weatherData: safeData) {
-//                        self.delegate?.didUpdateWeather(self, weather: weather)
-//                    }
-                    print(String(data: safeData, encoding: .utf8))
+                    do {
+                        let result = try JSONDecoder().decode(WeatherModel.self, from: safeData)
+                        complition(.success(result))
+                    } catch {
+                        complition(.failure(.cantParse))
+                    }
                 }
             }
             task.resume()
         }
     }
-    
-//    func parseJSON(weatherData: Data) -> WeatherModel? {
-//        let decoder = JSONDecoder()
-//        do {
-//            let decodedData = try decoder.decode(WeatherModel.self, from: weatherData)
-//            let current = decodedData.current
-//            let daily = decodedData.daily
-//            
-//            let weather = WeatherModel(current: current, daily: daily)
-//            print(weather)
-//            return weather
-//        } catch {
-//            self.delegate?.didFailWithError(error: error)
-//            return nil
-//        }
-//    }
 }

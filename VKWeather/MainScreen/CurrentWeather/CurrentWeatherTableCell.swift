@@ -15,7 +15,7 @@ extension CurrentWeatherTableCell: ConfigurableView {
         
         currentTemperatureLabel.text = "\(model.currentTemperature)°"
         
-        commentLabel.text = model.verbalDescription
+        commentLabel.text = model.verbalDescription.capitalized
         
         cloudsLabel.text = "\(model.clouds)%"
         
@@ -38,7 +38,7 @@ class CurrentWeatherTableCell: UITableViewCell {
     private let cellBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = CustomColors.setColor(style: .classicBlue)
-        view.layer.cornerRadius = 22
+        view.layer.cornerRadius = 25
         view.layer.masksToBounds = true
         view.toAutoLayout()
         return view
@@ -235,7 +235,7 @@ class CurrentWeatherTableCell: UITableViewCell {
     // MARK: - Semicircle
     
     private func drawSemicircle() {
-        let path = UIBezierPath(arcCenter: CGPoint(x: (contentView.layer.frame.width) / 2, y: (contentView.layer.frame.width) / 2 - 20), radius: (contentView.layer.frame.width / 5) * 2, startAngle: (-CGFloat.pi + 0.2), endAngle: -0.2, clockwise: true)
+        let path = UIBezierPath(arcCenter: CGPoint(x: (contentView.layer.frame.width) / 2 + sideInset/2, y: (contentView.layer.frame.width) / 2 ), radius: (contentView.layer.frame.width / 4.5) * 2, startAngle: (-CGFloat.pi + 0.15), endAngle: -0.15, clockwise: true)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
         shapeLayer.strokeColor = UIColor.white.cgColor
@@ -287,19 +287,20 @@ class CurrentWeatherTableCell: UITableViewCell {
  
         let constraints = [
             cellBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            cellBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            cellBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cellBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
+            cellBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             cellBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            cellBackgroundView.heightAnchor.constraint(equalToConstant: height),
             
             contentStack.centerXAnchor.constraint(equalTo: cellBackgroundView.centerXAnchor),
             contentStack.centerYAnchor.constraint(equalTo: cellBackgroundView.centerYAnchor),
             contentStack.widthAnchor.constraint(equalToConstant: contentView.frame.width / 3 * 2),
             
             sunriseStack.bottomAnchor.constraint(equalTo: cellBackgroundView.bottomAnchor, constant: -bottomInset),
-            sunriseStack.leadingAnchor.constraint(equalTo: cellBackgroundView.leadingAnchor, constant: inset),
+            sunriseStack.leadingAnchor.constraint(equalTo: cellBackgroundView.leadingAnchor, constant: sideInset/2),
             
             sunsetStack.bottomAnchor.constraint(equalTo: cellBackgroundView.bottomAnchor, constant: -bottomInset),
-            sunsetStack.trailingAnchor.constraint(equalTo: cellBackgroundView.trailingAnchor, constant: -inset)
+            sunsetStack.trailingAnchor.constraint(equalTo: cellBackgroundView.trailingAnchor, constant: -sideInset/2)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -307,9 +308,11 @@ class CurrentWeatherTableCell: UITableViewCell {
     
     // MARK: - Insets
     
-    private var inset: CGFloat { return (contentView.layer.frame.width / 10) - 15 }
+    private var sideInset: CGFloat { return (contentView.layer.frame.width / 13) }
     
-    private var bottomInset: CGFloat { return 25 }
+    private var bottomInset: CGFloat { return 15 }
+    
+    private var height: CGFloat { return (contentView.layer.frame.width / 1.5) }
     
 }
 

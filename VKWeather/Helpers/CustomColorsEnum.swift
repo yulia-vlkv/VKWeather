@@ -18,7 +18,7 @@ enum CustomColors {
     static func setColor (style: CustomColors) -> UIColor {
         switch style {
         case .almostWhite:
-            return UIColor(named: "lightGray")!
+            return UIColor(named: "almostWhite")!
         case .simpleGray:
             return UIColor(named: "simpleGray")!
         case .almostBlack:

@@ -60,16 +60,16 @@ class MainScreenView: UIViewController {
     private func configureNavigationBar(){
         
         navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.backgroundColor = CustomColors.setColor(style: .classicBlue)
+        navigationController?.navigationBar.tintColor = .white
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "map.fill"),
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(toLocationSelection))
-        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = CustomColors.setColor(style: .classicBlue)
         navigationController?.navigationBar.scrollEdgeAppearance  = appearance
         navigationController?.navigationBar.standardAppearance  = appearance
 

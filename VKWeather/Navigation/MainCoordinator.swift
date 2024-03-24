@@ -15,6 +15,7 @@ class MainCoordinator: Coordinator {
     let window: UIWindow
     
     private let fabric: MainFabric
+    private var navigationController: UINavigationController?
 
     init(_ window: UIWindow, fabric: MainFabric) {
         self.fabric = fabric
@@ -32,13 +33,15 @@ class MainCoordinator: Coordinator {
             self?.showManualLocationScreen()
         }
         
-        window.rootViewController = controller
+        let navigationController = fabric.makeNavigationController(rootViewController: controller)
+        
+        self.navigationController = navigationController
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
         UserDefaults.standard.set(true, forKey: "LocationSelected")
     }
-    
-    
+
     private func showManualLocationScreen() {
         let (controller, model) = fabric.makeLocationSelectorScreen()
         

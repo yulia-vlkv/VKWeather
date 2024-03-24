@@ -22,6 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appCoordinator?.start()
 
         self.window = window
+        
+        locationManager.getLocation()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

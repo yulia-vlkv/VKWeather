@@ -23,29 +23,29 @@ struct CurrentWeatherTableCellModel {
     
     init(with currentWeather: CurrentWeather, currentDate: Date) {
         
-        self.currentTemperature = String(currentWeather.main.currentTemperature)
+        self.currentTemperature = String(currentWeather.temperature)
         
         self.verbalDescription = currentWeather.description[0].verbalDesctiption
         
-        self.clouds = String(Int(currentWeather.clouds.all))
+        self.clouds = String(Int(currentWeather.clouds))
         
-        self.windSpeed =  String(currentWeather.wind.speed)
+        self.windSpeed =  String(currentWeather.windSpeed)
         
-        self.humidity = String(Int(currentWeather.main.humidity))
+        self.humidity = String(Int(currentWeather.humidity))
         
         self.sunriseTime = {
-            let date = NSDate(timeIntervalSince1970: currentWeather.sun.sunriseTime as Double)
+            let date = NSDate(timeIntervalSince1970: currentWeather.sunrise as Double)
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "ru_RU")
-            dateFormatter.dateFormat = "HH:mm, d MMMM"
+            dateFormatter.dateFormat = "HH:mm"
             return dateFormatter.string(from: date as Date)
         }()
         
         self.sunsetTime = {
-            let date = NSDate(timeIntervalSince1970: currentWeather.sun.sunsetTime as Double)
+            let date = NSDate(timeIntervalSince1970: currentWeather.sunset as Double)
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "ru_RU")
-            dateFormatter.dateFormat = "HH:mm, d MMMM"
+            dateFormatter.dateFormat = "HH:mm"
             return dateFormatter.string(from: date as Date)
         }()
         

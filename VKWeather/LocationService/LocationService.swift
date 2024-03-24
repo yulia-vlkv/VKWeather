@@ -5,6 +5,7 @@
 //  Created by Iuliia Volkova on 23.03.2024.
 //
 
+
 import Foundation
 import CoreLocation
 
@@ -15,6 +16,7 @@ struct Location: Codable {
     let longitude: String
     let latitude: String
 }
+
 
 class LocationService: NSObject {
 
@@ -29,7 +31,7 @@ class LocationService: NSObject {
         super.init()
         
         locationManager.delegate = self
-        
+        checkUserLocationPermissions()
     }
     
     public func getLocation(){
@@ -56,6 +58,7 @@ class LocationService: NSObject {
     }
     
     public func checkUserLocationPermissions(response: ((Bool) -> Void)? = nil) {
+        locationManager.startUpdatingLocation()
     
         switch locationManager.authorizationStatus {
             

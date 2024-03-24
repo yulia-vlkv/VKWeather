@@ -12,7 +12,6 @@ import CoreLocation
 
 
 protocol MainScreenViewOutput: AnyObject {
-    
     var onOpenLocationSelection: (() -> Void)? { get set }
 }
 
@@ -22,17 +21,9 @@ enum MainScreenDataSourceSection {
 }
 
 enum MainScreenDataSourceItem {
-    
     case currentWeather(CurrentWeatherTableCellModel)
     case dailyWeather(DailyWeatherTableCellModel)
 }
-
-struct MainScreenWeatherFetchResponse: Codable {
-    
-    var currentWeather: CurrentWeather
-    var dailyWeather: [DailyWeather]
-}
-
 
 class MainScreenViewModel: MainScreenViewOutput {
     
@@ -75,7 +66,7 @@ class MainScreenViewModel: MainScreenViewOutput {
         }
     }
     
-    private var fetchResults: MainScreenWeatherFetchResponse? {
+    private var fetchResults: WeatherModel? {
         didSet {
             if let fetchResults = fetchResults {
                 sections = mapToViewModel(fetchResults: fetchResults)
@@ -94,15 +85,17 @@ class MainScreenViewModel: MainScreenViewOutput {
     }
     
     func onViewDidLoad() {
-//        configureDataFromCache()
+        configureDataFromCache()
         fetchData()
+        
     }
     
     private func configureDataFromCache() {
         if let savedWeather = userDefaults.object(forKey: key) {
             do {
-                let savedWeather = try JSONDecoder().decode(MainScreenWeatherFetchResponse.self, from: savedWeather as! Data)
+                let savedWeather = try JSONDecoder().decode(WeatherModel.self, from: savedWeather as! Data)
                 self.sections = self.mapToViewModel(fetchResults: savedWeather)
+                print(savedWeather)
             } catch {
                 print("Unable to decode weather (\(error))")
             }
@@ -111,12 +104,22 @@ class MainScreenViewModel: MainScreenViewOutput {
     
     
     private func fetchData() {
-        forecastService.fetchCurrentWeather(latitude: location.longitude, longitude: location.latitude)
-        forecastService.fetchDailyWeather(latitude: location.longitude, longitude: location.latitude)
-//        self.saveDataToCache()
+        let urlString = forecastService.getURLString(latitude: location.latitude, longitude: location.longitude)
+        forecastService.performRequest(with: urlString) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let weather):
+                    debugPrint(weather)
+                    self?.mapToViewModel(fetchResults: weather)
+                    self?.saveDataToCache(fetchResults: weather)
+                case .failure(let error):
+                    debugPrint(error)
+                }
+            }
+        }
     }
     
-    private func saveDataToCache() {
+    private func saveDataToCache(fetchResults: WeatherModel) {
         do {
             let data = try JSONEncoder().encode(fetchResults)
             userDefaults.set(data, forKey: key)
@@ -125,7 +128,7 @@ class MainScreenViewModel: MainScreenViewOutput {
         }
     }
     
-    private func mapToViewModel(fetchResults: MainScreenWeatherFetchResponse) -> [MainScreenDataSourceSection] {
+    private func mapToViewModel(fetchResults: WeatherModel) -> [MainScreenDataSourceSection] {
         var resultSections: [MainScreenDataSourceSection] = []
         
         resultSections.append(
