@@ -26,6 +26,7 @@ class ForecastService {
     
     private let baseURL = "https://api.openweathermap.org/data/3.0/onecall?units=metric&lang=ru"
     
+    // Получаем ключ из property list
     private var apiKey: String {
       get {
         guard let filePath = Bundle.main.path(forResource: "Keys", ofType: "plist") else {
@@ -65,5 +66,6 @@ class ForecastService {
             task.resume()
         }
     }
+
 }
 

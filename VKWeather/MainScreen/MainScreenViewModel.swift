@@ -101,8 +101,7 @@ class MainScreenViewModel: MainScreenViewOutput {
     }
     
     func onViewDidLoad() {
-        configureDataFromCache()
-        fetchData()
+        checkExpiredDate()
     }
     
     private func configureDataFromCache() {
@@ -116,6 +115,19 @@ class MainScreenViewModel: MainScreenViewOutput {
         }
     }
     
+    private func checkExpiredDate() {
+        
+        if let expiredDate = userDefaults.object(forKey: "expired") as? Date {
+            let timeInterval = Date.now.addingTimeInterval(5000).timeIntervalSinceReferenceDate
+            let difference = Date.now.timeIntervalSinceReferenceDate - expiredDate.timeIntervalSinceReferenceDate
+            if difference > timeInterval {
+                userDefaults.removeObject(forKey: key)
+                fetchData()
+            } else {
+                configureDataFromCache()
+            }
+        }
+    }
     
     private func fetchData() {
         let urlString = forecastService.getURLString(latitude: location.latitude, longitude: location.longitude)
@@ -124,7 +136,7 @@ class MainScreenViewModel: MainScreenViewOutput {
                 switch result {
                 case .success(let weather):
                     self?.saveDataToCache(fetchResults: weather)
-                    self?.view.reloadData()
+                    self?.fetchResults = weather
                 case .failure(let error):
                     debugPrint(error)
                 }
@@ -136,6 +148,7 @@ class MainScreenViewModel: MainScreenViewOutput {
         do {
             let data = try JSONEncoder().encode(fetchResults)
             userDefaults.set(data, forKey: key)
+            userDefaults.set(Date(), forKey: "expired")
         } catch {
             print("Unable to encode weather (\(error))")
         }
@@ -166,4 +179,14 @@ class MainScreenViewModel: MainScreenViewOutput {
         
         return resultSections
     }
+}
+
+
+extension MainScreenViewModel: LocationServiceDelegate {
+    
+    func locationUpdated() {
+        staticLocation = locationService.currentLocation
+        fetchData()
+    }
+    
 }

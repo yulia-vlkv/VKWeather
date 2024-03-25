@@ -50,9 +50,9 @@ class MainCoordinator: Coordinator {
         
         let (controller, model) = fabric.makeLocationSelectorScreen()
         
-        model.onClose = { [weak self] in
-
-        }
+//        model.onClose = { [weak self] in
+//
+//        }
         
         model.onSuccess = { [weak self] location in
             self?.showMainScreen(location: location)

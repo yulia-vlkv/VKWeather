@@ -13,4 +13,12 @@ protocol ConfigurableView {
     
     func configure(with model: Model)
     
+//    func reloadData()
+    
 }
+
+//extension ConfigurableView {
+//    func reloadData() {
+//        
+//    }
+//}

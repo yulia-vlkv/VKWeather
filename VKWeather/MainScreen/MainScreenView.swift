@@ -79,9 +79,9 @@ class MainScreenView: UIViewController {
         model.showLocationSelection()
     }
     
-    public func reloadData() {
-        mainTableView.reloadData()
-    }
+//    public func reloadData() {
+//        mainTableView.reloadData()
+//    }
     
 }
 

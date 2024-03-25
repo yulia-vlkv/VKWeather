@@ -84,7 +84,6 @@ class DailyWeatherTableCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
         label.toAutoLayout()
         return label
     }()
@@ -151,7 +150,7 @@ class DailyWeatherTableCell: UITableViewCell {
     
     private var labelHeight: CGFloat { return (contentView.layer.frame.width / 4) }
     
-    private var sideInset: CGFloat { return (contentView.layer.frame.width / 13) }
+    private var sideInset: CGFloat { return (contentView.layer.frame.width / 14) }
     
     private var topInset: CGFloat { return (contentView.layer.frame.width / 25)  }
 

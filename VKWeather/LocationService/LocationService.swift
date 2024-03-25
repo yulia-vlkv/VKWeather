@@ -9,6 +9,11 @@ import Foundation
 import CoreLocation
 
 
+protocol LocationServiceDelegate: AnyObject {
+    func locationUpdated()
+}
+
+
 struct Location: Codable {
     let city: String
     let country: String
@@ -18,6 +23,8 @@ struct Location: Codable {
 
 
 class LocationService: NSObject {
+    
+    weak var locationDelegate: LocationServiceDelegate?
 
     static var shared = LocationService()
     
@@ -53,6 +60,7 @@ class LocationService: NSObject {
                     latitude: String(location.coordinate.latitude)
                 )
                 self.currentLocation = placeForWeather
+                self.locationDelegate?.locationUpdated()
             }
         }
     }

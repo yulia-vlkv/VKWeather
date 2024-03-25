@@ -21,6 +21,7 @@ class MainFabric {
         let view = MainScreenView()
         let model = MainScreenViewModel(view: view, location: location)
         view.model = model
+        LocationService.shared.locationDelegate = model
         return (view, model)
     }
     
