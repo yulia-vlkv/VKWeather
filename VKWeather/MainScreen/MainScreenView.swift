@@ -14,9 +14,11 @@ extension MainScreenView: ConfigurableView {
         navigationItem.title = model.city
         mainTableView.reloadData()
     }
+    
 }
 
 
+// MARK: - Основной экран
 class MainScreenView: UIViewController {
     
     public var model: MainScreenViewModel!

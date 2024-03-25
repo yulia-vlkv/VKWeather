@@ -9,6 +9,7 @@
 import Foundation
 
 
+// MARK: - Вьюмодель для ячейки с подробной погодой на текущий день
 struct CurrentWeatherTableCellModel {
     
     let currentTemperature: String
@@ -66,6 +67,6 @@ struct CurrentWeatherTableCellModel {
             return result.lowercased()
         }()
     }
+    
 }
-
 

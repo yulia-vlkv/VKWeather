@@ -13,12 +13,14 @@ class LocationSelectorView: UIAlertController {
     
     public var model: LocationSelectorViewModel!
     
+    // Создаем алерт
     public static func create() -> Self {
         let alert = Self(title: "Укажите вашу локацию", message: nil, preferredStyle: .alert)
         alert.configure()
         return alert
     }
     
+    // Настраиваем алерт
     private func configure() {
         addTextField() { newTextField in
             newTextField.placeholder = "Мой город"
@@ -36,5 +38,6 @@ class LocationSelectorView: UIAlertController {
             }
         })
     }
+    
 }
 

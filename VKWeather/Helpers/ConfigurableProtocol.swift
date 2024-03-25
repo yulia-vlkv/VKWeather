@@ -7,18 +7,13 @@
 
 import Foundation
 
+
+// Конфигурируем вью по модели
 protocol ConfigurableView {
     
     associatedtype Model
     
     func configure(with model: Model)
     
-//    func reloadData()
-    
 }
 
-//extension ConfigurableView {
-//    func reloadData() {
-//        
-//    }
-//}

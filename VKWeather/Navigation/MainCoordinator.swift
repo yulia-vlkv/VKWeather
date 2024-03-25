@@ -28,7 +28,7 @@ class MainCoordinator: Coordinator {
         showMainScreen()
     }
     
-    // Показать главный экран
+    // MARK: - Показать главный экран
     private func showMainScreen(location: Location? = nil) {
         let (controller, screen) = fabric.makeMainScreen(location: location)
         
@@ -45,14 +45,14 @@ class MainCoordinator: Coordinator {
         UserDefaults.standard.set(true, forKey: "LocationSelected")
     }
     
-    // Показать окно выбора локации
+    // MARK: - Показать окно выбора локации
     private func showManualLocationScreen() {
         
         let (controller, model) = fabric.makeLocationSelectorScreen()
-        
-//        model.onClose = { [weak self] in
-//
-//        }
+
+        model.onClose = { [weak self] in
+            controller.dismiss(animated: false)
+        }
         
         model.onSuccess = { [weak self] location in
             self?.showMainScreen(location: location)
@@ -60,5 +60,6 @@ class MainCoordinator: Coordinator {
         
         window.rootViewController?.present(controller, animated: true)
     }
+    
 }
 

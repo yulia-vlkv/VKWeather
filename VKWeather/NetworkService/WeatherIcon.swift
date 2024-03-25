@@ -8,7 +8,7 @@
 import UIKit
 
 
-// Модель иконки
+// MARK: - Модель иконки
 struct Icon: Codable {
     
     var iconCode: Int
@@ -18,9 +18,10 @@ struct Icon: Codable {
         case iconCode = "id"
         case verbalDesctiption = "description"
     }
+    
 }
 
-// Тип иконки
+// MARK: - Тип иконки
 enum WeatherIconType {
     case clearSky
     case cloudly
@@ -31,7 +32,7 @@ enum WeatherIconType {
     case unknown
 }
 
-// Соответствие кода получаемой иконки с типом иконки
+// MARK: - Соответствие кода получаемой иконки с типом иконки
 extension WeatherIconType {
     
     init(code: Int) {
@@ -58,10 +59,11 @@ extension WeatherIconType {
             self = .unknown
         }
     }
+    
 }
 
 
-// Класс, описывающий иконку
+// MARK: - Класс, описывающий иконку
 class WeatherIcon {
     
     // Получаемый код иконки
@@ -97,5 +99,6 @@ class WeatherIcon {
             return UIImage(systemName: "sun.max.fill")!
         }
     }
+    
 }
 

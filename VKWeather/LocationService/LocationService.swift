@@ -14,6 +14,7 @@ protocol LocationServiceDelegate: AnyObject {
 }
 
 
+// MARK: - Описание локации
 struct Location: Codable {
     let city: String
     let country: String
@@ -22,6 +23,7 @@ struct Location: Codable {
 }
 
 
+// MARK: - LocationService
 class LocationService: NSObject {
     
     weak var locationDelegate: LocationServiceDelegate?
@@ -40,6 +42,7 @@ class LocationService: NSObject {
         checkUserLocationPermissions()
     }
     
+    // MARK: - Получаем текущую локацию, если есть досьуп к геолокации
     public func getLocation(){
         if locationManager.authorizationStatus == .authorizedAlways || locationManager.authorizationStatus == .authorizedWhenInUse {
             if let location = locationManager.location {
@@ -48,6 +51,7 @@ class LocationService: NSObject {
         }
     }
     
+    // MARK: - Получаем текущую локацию
     private func configureCurrentLocation(location: CLLocation) {
         self.getLocationFromCoordinates(for: location) { placemark in
             DispatchQueue.main.async {
@@ -65,6 +69,7 @@ class LocationService: NSObject {
         }
     }
     
+    // MARK: - Проверяем, есть ли доступ к геолокации
     public func checkUserLocationPermissions(response: ((Bool) -> Void)? = nil) {
     
         switch locationManager.authorizationStatus {
@@ -90,6 +95,8 @@ class LocationService: NSObject {
         }
     }
     
+    // MARK: - Функции CLGeocoder
+    // Получаем локацию по координатам
     public func getLocationFromCoordinates(for location: CLLocation,
                   completion: @escaping (CLPlacemark?) -> Void) {
         
@@ -112,6 +119,7 @@ class LocationService: NSObject {
         }
     }
     
+    // Получаем локацию по строке (город)
     public func getLocationFromString(from address: String,
                      completion: @escaping (_ location: CLLocationCoordinate2D?)-> Void) {
         
@@ -125,10 +133,11 @@ class LocationService: NSObject {
             completion(location)
         }
     }
+    
 }
 
 
-// MARK: - Delegate
+// MARK: - CLLocationManagerDelegate
 extension LocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -163,4 +172,5 @@ extension LocationService: CLLocationManagerDelegate {
             fatalError("Не обрабатываемый статус")
         }
     }
+    
 }

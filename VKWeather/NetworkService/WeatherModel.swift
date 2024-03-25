@@ -8,8 +8,9 @@
 import Foundation
 
 
-// Модель погоды
+// MARK: - Модель погоды
 struct WeatherModel: Codable {
+    
     var currentWeather: CurrentWeather
     var dailyWeather: [DailyWeather]
     
@@ -17,9 +18,12 @@ struct WeatherModel: Codable {
         case currentWeather = "current"
         case dailyWeather = "daily"
     }
+    
 }
 
+// MARK: - Модель погоды на день
 struct CurrentWeather: Codable {
+    
     var sunrise: Double
     var sunset: Double
     var temperature: Float
@@ -37,9 +41,12 @@ struct CurrentWeather: Codable {
         case clouds
         case description = "weather"
     }
+    
 }
 
+// MARK: - Модель погоды на неделю
 struct DailyWeather: Codable {
+    
     var date: Double
     var temp: Temperature
     var description: [Icon]
@@ -49,8 +56,10 @@ struct DailyWeather: Codable {
         case date = "dt"
         case description = "weather"
     }
+    
 }
 
+// MARK: - Модель температуры (погода на неделю)
 struct Temperature: Codable {
     
     var lowestTemperature: Float
@@ -60,5 +69,6 @@ struct Temperature: Codable {
         case lowestTemperature = "min"
         case highestTemperature = "max"
     }
+    
 }
 

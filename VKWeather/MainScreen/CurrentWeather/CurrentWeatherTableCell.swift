@@ -9,6 +9,7 @@
 import UIKit
 
 
+// MARK: - Конфигурируем вью по данным погоды на текущий день
 extension CurrentWeatherTableCell: ConfigurableView {
     
     public func configure(with model: CurrentWeatherTableCellModel) {
@@ -32,6 +33,7 @@ extension CurrentWeatherTableCell: ConfigurableView {
 }
 
 
+// MARK: - Вью для погоды на текущий день
 class CurrentWeatherTableCell: UITableViewCell {
     
     private var cells: [CurrentWeatherTableCellModel] = []

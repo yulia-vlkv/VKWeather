@@ -88,13 +88,12 @@
 		EF4165652BAE9D75007BB3C2 /* VKWeather */ = {
 			isa = PBXGroup;
 			children = (
+				EFC096A72BB1D69C0077CAC5 /* Application */,
 				EF41657A2BAEA037007BB3C2 /* Navigation */,
 				EF41657B2BAEA04C007BB3C2 /* NetworkService */,
 				EF41657D2BAEA074007BB3C2 /* LocationService */,
 				EF41657C2BAEA065007BB3C2 /* MainScreen */,
 				EF4165842BAEA7C1007BB3C2 /* Helpers */,
-				EF4165662BAE9D75007BB3C2 /* AppDelegate.swift */,
-				EF4165682BAE9D75007BB3C2 /* SceneDelegate.swift */,
 				EF41656F2BAE9D78007BB3C2 /* Assets.xcassets */,
 				EF4165742BAE9D78007BB3C2 /* Info.plist */,
 			);
@@ -169,6 +168,15 @@
 				EF4165952BAEBBE7007BB3C2 /* DailyWeatherTableCellModel.swift */,
 			);
 			path = DailyWeather;
+			sourceTree = "<group>";
+		};
+		EFC096A72BB1D69C0077CAC5 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				EF4165682BAE9D75007BB3C2 /* SceneDelegate.swift */,
+				EF4165662BAE9D75007BB3C2 /* AppDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

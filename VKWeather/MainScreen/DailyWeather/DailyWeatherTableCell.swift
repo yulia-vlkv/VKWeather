@@ -8,6 +8,7 @@
 import UIKit
 
 
+// MARK: - Конфигурируем вью по данным погоды на день (погода на неделю)
 extension DailyWeatherTableCell: ConfigurableView {
     
     func configure(with model: DailyWeatherTableCellModel) {
@@ -19,6 +20,7 @@ extension DailyWeatherTableCell: ConfigurableView {
 }
 
 
+// MARK: - Вью для погоды на день (погода на неделю)
 class DailyWeatherTableCell: UITableViewCell {
     
     private var cells: [DailyWeatherTableCellModel] = []
@@ -155,5 +157,4 @@ class DailyWeatherTableCell: UITableViewCell {
     private var topInset: CGFloat { return (contentView.layer.frame.width / 25)  }
 
 }
-
 

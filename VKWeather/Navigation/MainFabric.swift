@@ -32,5 +32,6 @@ class MainFabric {
         view.model = model
         return (view, model)
     }
+    
 }
 

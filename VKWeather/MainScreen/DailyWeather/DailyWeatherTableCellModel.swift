@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 
+// MARK: - Вьюмодель для ячейки с погодой на день (погода на неделю)
 struct DailyWeatherTableCellModel {
     
     let date: String
@@ -16,9 +17,6 @@ struct DailyWeatherTableCellModel {
     let description: String
     let lowestTemperature: String
     let highestTemperature: String
-}
-
-extension DailyWeatherTableCellModel  {
     
     init(with dailyWeather: DailyWeather) {
         
@@ -41,6 +39,7 @@ extension DailyWeatherTableCellModel  {
         self.lowestTemperature = String(format: "%.0f", dailyWeather.temp.lowestTemperature)
         
         self.highestTemperature = String(format: "%.0f", dailyWeather.temp.highestTemperature)
-        
     }
+    
 }
+

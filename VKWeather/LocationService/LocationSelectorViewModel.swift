@@ -21,12 +21,12 @@ class LocationSelectorViewModel: LocationSelectorViewOutput {
     public var onSuccess: ((Location) -> Void)?
     public var onClose: (() -> Void)?
     private let locationService = LocationService.shared
-    private let key: String = "selectedLocation"
     
     public func cancel() {
         self.onClose?()
     }
     
+    // MARK: - Находим локацию по строке(город)
     public func findLocation(for text: String) {
         locationService.getLocationFromString(from: text, completion: { location in
             guard let location = location else { return }
@@ -47,10 +47,11 @@ class LocationSelectorViewModel: LocationSelectorViewOutput {
         })
     }
     
+    // Сохраняем локацию
     private func saveSelectedLocation(location: Location) {
         do {
             let data = try JSONEncoder().encode(location)
-            UserDefaults.standard.set(data, forKey: key)
+            UserDefaults.standard.set(data, forKey: "selectedLocation")
         } catch {
             print("Unable to encode weather (\(error))")
         }

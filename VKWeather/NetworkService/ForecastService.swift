@@ -26,7 +26,7 @@ class ForecastService {
     
     private let baseURL = "https://api.openweathermap.org/data/3.0/onecall?units=metric&lang=ru"
     
-    // Получаем ключ из property list
+    // MARK: - Получаем ключ из property list
     private var apiKey: String {
       get {
         guard let filePath = Bundle.main.path(forResource: "Keys", ofType: "plist") else {
@@ -40,12 +40,14 @@ class ForecastService {
       }
     }
     
-    func getURLString(latitude: String, longitude: String) -> String  {
+    // MARK: - Формируем URL адрес
+    private func getURLString(latitude: String, longitude: String) -> String  {
         let urlString = "\(baseURL)&appid=\(apiKey)&lat=\(latitude)&lon=\(longitude)"
         return urlString
     }
     
-    func performRequest(with urlString: String, complition: @escaping (Result<WeatherModel, ForecastServiceError>) -> Void) {
+    // MARK: - Осуществляем запрос
+    private func performRequest(with urlString: String, complition: @escaping (Result<WeatherModel, ForecastServiceError>) -> Void) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) {( data, response, error) in
@@ -65,6 +67,12 @@ class ForecastService {
             }
             task.resume()
         }
+    }
+    
+    // MARK: - Получаем погоду по строке
+    public func getWeather(latitude: String, longitude: String, complition: @escaping (Result<WeatherModel, ForecastServiceError>) -> Void) {
+        let urlString = getURLString(latitude: latitude, longitude: longitude)
+        performRequest(with: urlString, complition: complition)
     }
 
 }

@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+// Кастомные цвета
 enum CustomColors {
     
     case almostWhite
@@ -29,4 +31,5 @@ enum CustomColors {
             return UIColor(named: "alertRed")!
         }
     }
+    
 }
