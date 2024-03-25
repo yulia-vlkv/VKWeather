@@ -58,7 +58,7 @@ class MainScreenViewModel: MainScreenViewOutput {
                 print("Unable to decode weather (\(error))")
             }
         } else {
-            return staticLocation ?? locationService.currentLocation ?? Location(city: "000", country: "000", longitude: "0000", latitude: "0000")
+            return staticLocation ?? locationService.currentLocation ?? Location(city: "Город", country: "Страна", longitude: "0000", latitude: "0000")
         }
         return Location(city: "Город", country: "Страна", longitude: "0000", latitude: "0000")
     }

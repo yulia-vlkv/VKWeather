@@ -81,10 +81,6 @@ class MainScreenView: UIViewController {
         model.showLocationSelection()
     }
     
-//    public func reloadData() {
-//        mainTableView.reloadData()
-//    }
-    
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
