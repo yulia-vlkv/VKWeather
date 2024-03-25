@@ -18,17 +18,10 @@ protocol LocationSelectorViewOutput: AnyObject {
 
 class LocationSelectorViewModel: LocationSelectorViewOutput {
     
-    // MARK: - LocationSelectorViewOutput
-    
     public var onSuccess: ((Location) -> Void)?
     public var onClose: (() -> Void)?
-    
-    // MARK: - Private properties
-    
     private let locationService = LocationService.shared
     private let key: String = "selectedLocation"
-    
-    // MARK: - Public methods
     
     public func cancel() {
         self.onClose?()

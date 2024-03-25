@@ -51,6 +51,22 @@ class MainScreenViewModel: MainScreenViewOutput {
         return Location(city: "000", country: "000", longitude: "0000", latitude: "0000")
     }
     
+//    private func getLocationForUrlRequest() {
+//        DispatchQueue.main.async {
+//            if let savedLocation = self.userDefaults.object(forKey: "selectedLocation") {
+//                do {
+//                    let savedLocation = try JSONDecoder().decode(Location.self, from: savedLocation as! Data)
+//                    self.location = savedLocation
+//                } catch {
+//                    print("Unable to decode weather (\(error))")
+//                }
+//            } else {
+//                let recievedLocation = self.staticLocation ?? self.locationService.currentLocation ?? Location(city: "000", country: "000", longitude: "0000", latitude: "0000")
+//                self.location = recievedLocation
+//            }
+//        }
+//    }
+//    //
     private var staticLocation: Location?
     
     init(view: MainScreenView, location: Location?) {
@@ -87,7 +103,6 @@ class MainScreenViewModel: MainScreenViewOutput {
     func onViewDidLoad() {
         configureDataFromCache()
         fetchData()
-        
     }
     
     private func configureDataFromCache() {
@@ -95,7 +110,6 @@ class MainScreenViewModel: MainScreenViewOutput {
             do {
                 let savedWeather = try JSONDecoder().decode(WeatherModel.self, from: savedWeather as! Data)
                 self.sections = self.mapToViewModel(fetchResults: savedWeather)
-                print(savedWeather)
             } catch {
                 print("Unable to decode weather (\(error))")
             }
@@ -109,9 +123,8 @@ class MainScreenViewModel: MainScreenViewOutput {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let weather):
-                    debugPrint(weather)
-                    self?.mapToViewModel(fetchResults: weather)
                     self?.saveDataToCache(fetchResults: weather)
+                    self?.view.reloadData()
                 case .failure(let error):
                     debugPrint(error)
                 }

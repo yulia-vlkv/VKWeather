@@ -5,7 +5,6 @@
 //  Created by Iuliia Volkova on 23.03.2024.
 //
 
-
 import Foundation
 import CoreLocation
 
@@ -44,21 +43,21 @@ class LocationService: NSObject {
     
     private func configureCurrentLocation(location: CLLocation) {
         self.getLocationFromCoordinates(for: location) { placemark in
-            
-            guard let placemark = placemark else { return }
-            
-            let placeForWeather = Location(
-                city: placemark.locality ?? "Неизвестно",
-                country: placemark.country ?? "Неизвестно",
-                longitude: String(location.coordinate.longitude),
-                latitude: String(location.coordinate.latitude)
-            )
-            self.currentLocation = placeForWeather
+            DispatchQueue.main.async {
+                guard let placemark = placemark else { return }
+                
+                let placeForWeather = Location(
+                    city: placemark.locality ?? "Неизвестно",
+                    country: placemark.country ?? "Неизвестно",
+                    longitude: String(location.coordinate.longitude),
+                    latitude: String(location.coordinate.latitude)
+                )
+                self.currentLocation = placeForWeather
+            }
         }
     }
     
     public func checkUserLocationPermissions(response: ((Bool) -> Void)? = nil) {
-        locationManager.startUpdatingLocation()
     
         switch locationManager.authorizationStatus {
             
@@ -118,7 +117,6 @@ class LocationService: NSObject {
             completion(location)
         }
     }
-
 }
 
 

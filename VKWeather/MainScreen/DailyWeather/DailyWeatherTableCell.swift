@@ -18,18 +18,12 @@ extension DailyWeatherTableCell: ConfigurableView {
     }
 }
 
-extension String {
-    var capitalizedSentence: String {
-        let firstLetter = self.prefix(1).capitalized
-        let remainingLetters = self.dropFirst().lowercased()
-        return firstLetter + remainingLetters
-    }
-}
 
 class DailyWeatherTableCell: UITableViewCell {
     
     private var cells: [DailyWeatherTableCellModel] = []
     
+    // MARK: - Фон
     private let cellBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -56,6 +50,7 @@ class DailyWeatherTableCell: UITableViewCell {
         return stack
     }()
     
+    // MARK: - Слева дата и иконка
     private let leftStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -82,6 +77,7 @@ class DailyWeatherTableCell: UITableViewCell {
         return image
     }()
     
+    // MARK: - В центре описание
     private let detailsLabel: UILabel = {
         let label = UILabel()
         label.textColor = CustomColors.setColor(style: .almostBlack)
@@ -93,6 +89,7 @@ class DailyWeatherTableCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Справа температура
     private let temperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = CustomColors.setColor(style: .almostBlack)
@@ -115,8 +112,7 @@ class DailyWeatherTableCell: UITableViewCell {
         configureLayout()
     }
     
-    // MARK: - Configure Layout
-
+    // MARK: - Сконфигурировать лэйаут
     private func configureLayout(){
         contentView.addSubview(cellBackgroundView)
         cellBackgroundView.addSubview(frameView)
@@ -143,24 +139,13 @@ class DailyWeatherTableCell: UITableViewCell {
             mainStackView.topAnchor.constraint(equalTo: frameView.topAnchor, constant: topInset),
             mainStackView.bottomAnchor.constraint(equalTo: frameView.bottomAnchor, constant: -topInset),
             mainStackView.leadingAnchor.constraint(equalTo: frameView.leadingAnchor, constant: sideInset),
-            mainStackView.trailingAnchor.constraint(equalTo: frameView.trailingAnchor, constant: -sideInset),
-            
-//            leftStackView.centerYAnchor.constraint(equalTo: frameView.centerYAnchor),
-//            leftStackView.leadingAnchor.constraint(equalTo: frameView.leadingAnchor, constant: sideInset),
-//            leftStackView.widthAnchor.constraint(equalToConstant: 50),
-//            
-//            detailsLabel.centerYAnchor.constraint(equalTo: frameView.centerYAnchor),
-//            detailsLabel.leadingAnchor.constraint(equalTo: leftStackView.trailingAnchor, constant: sideInset),
-//            detailsLabel.trailingAnchor.constraint(equalTo: temperatureLabel.leadingAnchor, constant: -sideInset),
-//   
-//            temperatureLabel.trailingAnchor.constraint(equalTo: frameView.leadingAnchor, constant: -sideInset)
-
+            mainStackView.trailingAnchor.constraint(equalTo: frameView.trailingAnchor, constant: -sideInset)
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
     
-    // MARK: - Insets
+    // MARK: - Отступы
     
     private var backgroundHeight: CGFloat { return labelHeight + 10 }
     
@@ -169,9 +154,6 @@ class DailyWeatherTableCell: UITableViewCell {
     private var sideInset: CGFloat { return (contentView.layer.frame.width / 13) }
     
     private var topInset: CGFloat { return (contentView.layer.frame.width / 25)  }
-//
-//    private var smallSideInset: CGFloat { return 10 }
-    
 
 }
 

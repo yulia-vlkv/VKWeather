@@ -34,8 +34,7 @@ class MainScreenView: UIViewController {
         model.onViewDidLoad()
     }
     
-    // MARK: - Configure TableView
-    
+    // MARK: - Сконфигурировать лэйаут
     private func configureTableView(){
         view.addSubview(mainTableView)
         mainTableView.backgroundColor = .white
@@ -68,6 +67,7 @@ class MainScreenView: UIViewController {
                                                             target: self,
                                                             action: #selector(toLocationSelection))
         let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = CustomColors.setColor(style: .classicBlue)
         navigationController?.navigationBar.scrollEdgeAppearance  = appearance
@@ -77,6 +77,10 @@ class MainScreenView: UIViewController {
     
     @objc private func toLocationSelection(){
         model.showLocationSelection()
+    }
+    
+    public func reloadData() {
+        mainTableView.reloadData()
     }
     
 }
@@ -92,7 +96,7 @@ extension MainScreenView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionModel = model.sections[section]
         switch sectionModel{
-        case .current(let items):
+        case .current(_):
             return 1
         case .daily(let items):
             return items.count
@@ -126,7 +130,6 @@ extension MainScreenView: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
-    
 }
 
 

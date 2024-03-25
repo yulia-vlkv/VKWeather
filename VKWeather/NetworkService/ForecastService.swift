@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 
+
 protocol ForecastServiceDelegate: AnyObject {
     func didUpdateWeather(_ forecastService: ForecastService, currentWeather: WeatherModel)
     func didFailWithError(error: Error)
@@ -24,9 +25,6 @@ class ForecastService {
     weak var delegate: ForecastServiceDelegate?
     
     private let baseURL = "https://api.openweathermap.org/data/3.0/onecall?units=metric&lang=ru"
-    
-//    private let baseURLCurrent = "https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru"
-//    private let baseURLDaily = "https://api.openweathermap.org/data/2.5/forecast/daily?&cnt=7&units=metric&lang=ru"
     
     private var apiKey: String {
       get {
@@ -68,3 +66,4 @@ class ForecastService {
         }
     }
 }
+

@@ -11,11 +11,7 @@ import UIKit
 
 class LocationSelectorView: UIAlertController {
     
-    // MARK: - Public properties
-    
     public var model: LocationSelectorViewModel!
-    
-    // MARK: - Initialization
     
     public static func create() -> Self {
         let alert = Self(title: "Укажите вашу локацию", message: nil, preferredStyle: .alert)

@@ -13,7 +13,7 @@
 		EF41657F2BAEA11B007BB3C2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF41657E2BAEA11B007BB3C2 /* Coordinator.swift */; };
 		EF4165812BAEA182007BB3C2 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4165802BAEA182007BB3C2 /* MainCoordinator.swift */; };
 		EF4165832BAEA1FA007BB3C2 /* MainFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4165822BAEA1FA007BB3C2 /* MainFabric.swift */; };
-		EF4165862BAEA7D3007BB3C2 /* AutoLayoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4165852BAEA7D3007BB3C2 /* AutoLayoutExtension.swift */; };
+		EF4165862BAEA7D3007BB3C2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4165852BAEA7D3007BB3C2 /* Extensions.swift */; };
 		EF4165882BAEA804007BB3C2 /* ConfigurableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4165872BAEA804007BB3C2 /* ConfigurableProtocol.swift */; };
 		EF41658A2BAEAA4F007BB3C2 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4165892BAEAA4F007BB3C2 /* MainScreenView.swift */; };
 		EF41658C2BAEAA61007BB3C2 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF41658B2BAEAA61007BB3C2 /* MainScreenViewModel.swift */; };
@@ -40,7 +40,7 @@
 		EF41657E2BAEA11B007BB3C2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		EF4165802BAEA182007BB3C2 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		EF4165822BAEA1FA007BB3C2 /* MainFabric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFabric.swift; sourceTree = "<group>"; };
-		EF4165852BAEA7D3007BB3C2 /* AutoLayoutExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayoutExtension.swift; sourceTree = "<group>"; };
+		EF4165852BAEA7D3007BB3C2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EF4165872BAEA804007BB3C2 /* ConfigurableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableProtocol.swift; sourceTree = "<group>"; };
 		EF4165892BAEAA4F007BB3C2 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		EF41658B2BAEAA61007BB3C2 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		EF4165842BAEA7C1007BB3C2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				EF4165852BAEA7D3007BB3C2 /* AutoLayoutExtension.swift */,
+				EF4165852BAEA7D3007BB3C2 /* Extensions.swift */,
 				EF4165872BAEA804007BB3C2 /* ConfigurableProtocol.swift */,
 				EF41659D2BAECD66007BB3C2 /* CustomColorsEnum.swift */,
 			);
@@ -249,7 +249,7 @@
 				EF41657F2BAEA11B007BB3C2 /* Coordinator.swift in Sources */,
 				EF4165A22BAEDD0A007BB3C2 /* WeatherModel.swift in Sources */,
 				EF4165A62BAEDDE3007BB3C2 /* ForecastService.swift in Sources */,
-				EF4165862BAEA7D3007BB3C2 /* AutoLayoutExtension.swift in Sources */,
+				EF4165862BAEA7D3007BB3C2 /* Extensions.swift in Sources */,
 				EF41658A2BAEAA4F007BB3C2 /* MainScreenView.swift in Sources */,
 				EF41658E2BAEB158007BB3C2 /* LocationService.swift in Sources */,
 				EF4165672BAE9D75007BB3C2 /* AppDelegate.swift in Sources */,

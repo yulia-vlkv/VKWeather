@@ -15,7 +15,7 @@ extension CurrentWeatherTableCell: ConfigurableView {
         
         currentTemperatureLabel.text = "\(model.currentTemperature)°"
         
-        commentLabel.text = model.verbalDescription.capitalized
+        commentLabel.text = model.verbalDescription.capitalizedSentence
         
         cloudsLabel.text = "\(model.clouds)%"
         
@@ -31,10 +31,12 @@ extension CurrentWeatherTableCell: ConfigurableView {
     }
 }
 
+
 class CurrentWeatherTableCell: UITableViewCell {
     
     private var cells: [CurrentWeatherTableCellModel] = []
     
+    // MARK: - Фон
     private let cellBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = CustomColors.setColor(style: .classicBlue)
@@ -52,8 +54,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         return stack
     }()
     
-    // MARK: - MainInfo
-    
+    // MARK: - Общая информация
     private let currentTemperatureLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
@@ -75,6 +76,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Детали
     private let detailsStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -84,8 +86,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         return stack
     }()
     
-    // MARK: - Clouds
-    
+    // MARK: - Облачность
     private let cloudsStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -111,8 +112,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         return label
     }()
     
-    // MARK: - Wind
-    
+    // MARK: - Ветер
     private let windStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -138,8 +138,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         return label
     }()
     
-    // MARK: - Humidity
-    
+    // MARK: - Влажность
     private let humidityStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -165,8 +164,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         return label
     }()
     
-    // MARK: - Date and time
-    
+    // MARK: - Дата
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
@@ -178,8 +176,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         return label
     }()
     
-    // MARK: - Sunrise
-    
+    // MARK: - Восход
     private let sunriseStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -205,8 +202,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         return label
     }()
     
-    // MARK: - Sunset
-    
+    // MARK: - Заход
     private let sunsetStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -232,8 +228,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         return label
     }()
     
-    // MARK: - Semicircle
-    
+    // MARK: - Нарисовать полукруг
     private func drawSemicircle() {
         let path = UIBezierPath(arcCenter: CGPoint(x: (contentView.layer.frame.width) / 2 + sideInset/2, y: (contentView.layer.frame.width) / 2 ), radius: (contentView.layer.frame.width / 4.5) * 2, startAngle: (-CGFloat.pi + 0.15), endAngle: -0.15, clockwise: true)
         let shapeLayer = CAShapeLayer()
@@ -258,8 +253,7 @@ class CurrentWeatherTableCell: UITableViewCell {
     }
     
     
-    // MARK: - Configure Layout
-
+    // MARK: - Сконфигурировать лэйаут
     private func configureLayout(){
         
         contentView.addSubview(cellBackgroundView)
@@ -306,8 +300,7 @@ class CurrentWeatherTableCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
     
-    // MARK: - Insets
-    
+    // MARK: - Отступы
     private var sideInset: CGFloat { return (contentView.layer.frame.width / 13) }
     
     private var bottomInset: CGFloat { return 15 }

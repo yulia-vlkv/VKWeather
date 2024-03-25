@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+// Модель погоды
 struct WeatherModel: Codable {
     var currentWeather: CurrentWeather
     var dailyWeather: [DailyWeather]
@@ -60,23 +62,3 @@ struct Temperature: Codable {
     }
 }
 
-//struct DailyWeatherResponse: Codable {
-//    var data: [DailyWeather]
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case data = "list"
-//    }
-//}
-//
-//struct DailyWeather: Codable {
-//
-//    var temp: Temperature
-//    var date: Double
-//    var description: [Icon]
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case temp
-//        case date = "dt"
-//        case description = "weather"
-//    }
-//}

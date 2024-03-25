@@ -23,7 +23,7 @@ struct CurrentWeatherTableCellModel {
     
     init(with currentWeather: CurrentWeather, currentDate: Date) {
         
-        self.currentTemperature = String(currentWeather.temperature)
+        self.currentTemperature = String(format: "%.0f", currentWeather.temperature)
         
         self.verbalDescription = currentWeather.description[0].verbalDesctiption
         

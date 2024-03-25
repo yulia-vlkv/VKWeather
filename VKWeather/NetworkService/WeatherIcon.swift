@@ -5,9 +5,10 @@
 //  Created by Iuliia Volkova on 23.03.2024.
 //
 
-
 import UIKit
 
+
+// Модель иконки
 struct Icon: Codable {
     
     var iconCode: Int
@@ -60,6 +61,7 @@ extension WeatherIconType {
 }
 
 
+// Класс, описывающий иконку
 class WeatherIcon {
     
     // Получаемый код иконки
